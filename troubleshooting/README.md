@@ -9,13 +9,12 @@
 |7| mistakes in iptables| viewing iptables file|1 h| Editing iptables file by adding 'ESTABLISHED' to work with opened connections and '-A INPUT -p tcp -m tcp --dport 80 -m comment --comment "#webserver" -j ACCEPT' to open 80 port.|15 min|
 |8| setting tomcat to start on VM boot |||run 'chkconfig tomcat on'|1 min|
 
-all logs and config views was performed with 'less' command
+all logs and config views were performed with 'less' command
 
 ###Possible configuration improvments (customer approve required)
 * server name config in main httpd config
 * too many modules are connected to httpd
 * backend errors shoud be intercepted by httpd
-* apache version is visible
 * tomcat can be binded to loopback ip
 
 

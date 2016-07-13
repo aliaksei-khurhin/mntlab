@@ -26,7 +26,6 @@ service iptables stop && chattr -i /etc/sysconfig/iptables
 
 #fix iptables rules
 sed -i 's/RELATED/RELATED,ESTABLISHED/' /etc/sysconfig/iptables
-#sed '10 i\
 sed -i '10 i\-A INPUT -p tcp -m tcp --dport 80 -m comment --comment "#webserver" -j ACCEPT' /etc/sysconfig/iptables
 sed -i '$ c\COMMIT' /etc/sysconfig/iptables
 service iptables start

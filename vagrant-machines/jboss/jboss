@@ -1,0 +1,31 @@
+#!/bin/sh
+# chkconfig: 2345 95 05
+
+start(){
+echo "Starting jboss.."
+su -l jboss -c "/opt/jboss/jboss-eap-5.1/jboss-as/bin/run.sh -c custom -b 127.0.0.1 -Djboss.server.log.dir=/home/jboss/logs -Djboss.server.home.url=file:///home/jboss/custom -Djboss.server.home.dir=/home/jboss/custom  > /home/jboss/logs/startup.log 2>>1 & "
+}
+stop(){
+echo "Stopping jboss.."
+su -l jboss -c "/opt/jboss/jboss-eap-5.1/jboss-as/bin/shutdown.sh -s 127.0.0.1 -u admin -p admin  > /home/jboss/logs/shutdown.log  2>>1 & "
+}
+restart(){
+stop
+sleep 30
+start
+}
+case "$1" in
+start)
+start
+;;
+stop)
+stop
+;;
+restart)
+restart
+;;
+*)
+echo "Usage: jboss {start|stop|restart}"
+exit 1
+esac
+exit 0

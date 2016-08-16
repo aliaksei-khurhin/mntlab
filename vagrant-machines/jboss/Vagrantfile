@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+  config.ssh.insert_key = false
+  config.vm.define "jboss" do |web|
+	web.vm.box = "sbeliakou/centos-6.7-x86_64"
+	web.vm.hostname = "jboss"
+	web.vm.network "private_network", ip: "192.168.33.15"
+	web.vm.provider "virtualbox" do |mashine|
+		mashine.name = "jboss"
+		mashine.memory = "4096"
+		mashine.cpus = 2
+	end
+	web.vm.provision "shell", path: "jboss.sh"
+  end
+end

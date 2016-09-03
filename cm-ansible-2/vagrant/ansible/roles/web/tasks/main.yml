@@ -1,0 +1,14 @@
+---
+# tasks file for web
+- debug: msg="Will install NGINX"
+
+- name: Instaling packages
+  yum: name={{ item.name }} state={{ item.state }}
+  with_items:
+    - {name: "http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm", state: "installed"} 
+    - {name: "nginx", state: "latest"}
+- name: copying config
+  template: src=virtual.conf dest=/etc/nginx/conf.d/
+  notify: restart nginx
+- name: start nginx
+  service: name=nginx state=started

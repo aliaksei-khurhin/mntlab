@@ -1,0 +1,3 @@
+---
+# defaults file for java
+package_java: "java-1.7.0-openjdk-devel"

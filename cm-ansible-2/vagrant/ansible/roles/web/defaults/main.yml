@@ -1,0 +1,4 @@
+---
+# defaults file for web
+webserver_name: "localhost"
+web_port: 8080

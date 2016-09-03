@@ -1,0 +1,14 @@
+---
+# vars file for jenkins
+jenkins_packages:
+    - jenkins
+    - git
+    
+#jenkins_resources:
+#    - {src: "config.xml", dest: "/var/lib/jenkins/"}
+#    - {src: "hudson.tasks.Maven.xml", dest: "/var/lib/jenkins/"}
+#    - {src: "plugins", dest: "/var/lib/jenkins", force: "no"}
+#    - {src: "jobs", dest: "/var/lib/jenkins", force: "no"}
+
+#jenkins_plugins:
+#    - {}

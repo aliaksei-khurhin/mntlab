@@ -1,0 +1,12 @@
+---
+# tasks file for tomcat
+- debug: msg="Will install Tomcat"
+- name: install tomcat
+  yum: name=tomcat state=installed
+
+- name: copying config
+  template: src=server.xml dest=/usr/share/tomcat/conf/
+  notify: restart tomcat
+ 
+- name: start tomcat
+  service: name=tomcat state=started enabled=true

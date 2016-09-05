@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.13">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>3</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>3</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.6.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/MNTLab/cm-ansible-1</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/aliaksei_khurhin</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>azaza</authToken>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>org.example</groupId>
+    <artifactId>mnt-lab</artifactId>
+  </rootModule>
+  <rootPOM>pom.xml</rootPOM>
+  <goals>clean package -DbuildNumber=${BUILD_ID}</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
+  <archivingDisabled>false</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+  <reporters/>
+  <publishers/>
+  <buildWrappers/>
+  <prebuilders/>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>datetime=$(date)
+cat &lt;&lt; INFO &gt; src/main/resources/build-info.txt 
+Git URL: ${GIT_URL}
+Latest commit: ${GIT_COMMIT}
+Name of branch: ${GIT_BRANCH}
+Building date time: $datetime INFO</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.32">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+          <configs class="empty-list"/>
+          <projects>deploy</projects>
+          <condition>ALWAYS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+          <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+        </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.TriggerBuilder>
+  </postbuilders>
+  <runPostStepsIfResult>
+    <name>FAILURE</name>
+    <ordinal>2</ordinal>
+    <color>RED</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>

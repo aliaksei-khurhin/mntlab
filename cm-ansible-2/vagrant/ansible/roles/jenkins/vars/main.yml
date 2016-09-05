@@ -4,11 +4,50 @@ jenkins_packages:
     - jenkins
     - git
     
-#jenkins_resources:
-#    - {src: "config.xml", dest: "/var/lib/jenkins/"}
-#    - {src: "hudson.tasks.Maven.xml", dest: "/var/lib/jenkins/"}
+jenkins_resources:
+    - {src: config.xml, dest: /var/lib/jenkins/}
+    - {src: hudson.tasks.Maven.xml, dest: /var/lib/jenkins/}
 #    - {src: "plugins", dest: "/var/lib/jenkins", force: "no"}
-#    - {src: "jobs", dest: "/var/lib/jenkins", force: "no"}
+    - {src: jobs, dest: /var/lib/jenkins, force: "no"}
 
-#jenkins_plugins:
-#    - {}
+jenkins_plugins:
+    - http://updates.jenkins-ci.org/latest/build-token-root.hpi
+    - http://updates.jenkins-ci.org/latest/config-file-provider.hpi
+    - http://updates.jenkins-ci.org/latest/credentials.hpi
+    - http://updates.jenkins-ci.org/latest/ssh-credentials.hpi
+    - http://updates.jenkins-ci.org/latest/token-macro.hpi    
+    - http://updates.jenkins-ci.org/latest/delivery-pipeline-plugin.hpi    
+    - http://updates.jenkins-ci.org/latest/structs.hpi
+    - http://updates.jenkins-ci.org/latest/junit.hpi
+    - http://updates.jenkins-ci.org/latest/javadoc.hpi
+    - http://updates.jenkins-ci.org/latest/display-url-api.hpi
+    - http://updates.jenkins-ci.org/latest/mailer.hpi
+    - http://updates.jenkins-ci.org/latest/maven-plugin.hpi
+    - http://updates.jenkins-ci.org/latest/dashboard-view.hpi
+    - http://updates.jenkins-ci.org/latest/jquery.hpi
+    - http://updates.jenkins-ci.org/latest/mapdb-api.hpi
+    - http://updates.jenkins-ci.org/latest/scm-api.hpi
+    - http://updates.jenkins-ci.org/latest/workflow-step-api.hpi
+    - http://updates.jenkins-ci.org/latest/workflow-scm-step.hpi
+    - http://updates.jenkins-ci.org/latest/subversion.hpi
+    - http://updates.jenkins-ci.org/latest/script-security.hpi
+    - http://updates.jenkins-ci.org/latest/matrix-project.hpi
+    - http://updates.jenkins-ci.org/latest/rebuild.hpi
+    - http://updates.jenkins-ci.org/latest/workflow-api.hpi
+    - http://updates.jenkins-ci.org/latest/workflow-basic-steps.hpi
+    - http://updates.jenkins-ci.org/latest/node-iterator-api.hpi
+    - http://updates.jenkins-ci.org/latest/ssh-slaves.hpi
+    - http://updates.jenkins-ci.org/latest/vsphere-cloud.hpi
+    - http://updates.jenkins-ci.org/latest/config-file-provider.hpi
+    - http://updates.jenkins-ci.org/latest/managed-scripts.hpi
+    - http://updates.jenkins-ci.org/latest/job-dsl.hpi
+    - http://updates.jenkins-ci.org/latest/project-inheritance.hpi
+    - http://updates.jenkins-ci.org/latest/promoted-builds.hpi
+    - http://updates.jenkins-ci.org/latest/run-condition.hpi
+    - http://updates.jenkins-ci.org/latest/conditional-buildstep.hpi
+    - http://updates.jenkins-ci.org/latest/parameterized-trigger.hpi
+    - http://updates.jenkins-ci.org/latest/ant.hpi
+    - http://updates.jenkins-ci.org/latest/analysis-core.hpi
+    - http://updates.jenkins-ci.org/latest/git-client.hpi
+    - http://updates.jenkins-ci.org/latest/git.hpi
+    - http://updates.jenkins-ci.org/latest/greenballs.hpi

@@ -9,11 +9,8 @@
       Application URL - http://localhost:8080/mnt-lab/
     jenkins_port: 9090
     tomcat_port: 9000
-    web_port: 10000
+    web_port: 8080
     package_java: "java-1.7.0-openjdk-devel"
-
-  pre_tasks:
-  - debug: msg="Let's do this"
 
   roles:
   - tomcat
@@ -21,4 +18,7 @@
   - web
 
   post_tasks:
+  - name: triggering jenkins build job via token
+    uri: url=http://localhost:{{jenkins_port}}/jenkins/job/build/build?token=azaza status_code=201
   - debug: var=services_info.split('\n')
+ 

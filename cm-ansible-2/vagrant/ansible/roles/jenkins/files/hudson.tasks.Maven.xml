@@ -2,7 +2,7 @@
 <hudson.tasks.Maven_-DescriptorImpl>
   <installations>
     <hudson.tasks.Maven_-MavenInstallation>
-      <name>1</name>
+      <name>mvn</name>
       <properties>
         <hudson.tools.InstallSourceProperty>
           <installers>

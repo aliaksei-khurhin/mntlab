@@ -10,21 +10,23 @@
   yum: name={{ item }} state=latest
   with_items:
     - "{{ jenkins_packages }}"
-#- name: JENKINS | changing jenkins user group
-#  user: name=jenkins groups=tomcat
-#- name: copying config file
-#  template: src=jenkins dest=/etc/sysconfig/
-#  notify: restart jenkins
-
-#- name: installing jenkins plugins
-#  get_url: url={{ item }} dest=/var/lib/jenkins/plugins/
-#  with_items:
-#    - "{{ jenkins_plugins }}"
-#- name: copying files
-#  copy: src={{ item.src }} dest={{ item.dest }} force={{ item.force| default("yes")}} owner=jenkins group=jenkins
-#  with_items:
-#    - "{{ jenkins_resources }}"
-#  notify: restart jenkins
+- name: JENKINS | changing jenkins user group
+  user: name=jenkins groups=tomcat
+- name: copying config file
+  template: src=jenkins dest=/etc/sysconfig/
+  notify: restart jenkins
+  
+- name: jenkins plugins folder
+  file: path=/var/lib/jenkins/plugins state=directory mode=0755 owner=jenkins
+- name: installing jenkins plugins
+  get_url: url={{ item }} dest=/var/lib/jenkins/plugins/
+  with_items:
+    - "{{ jenkins_plugins }}"
+- name: copying files
+  copy: src={{ item.src }} dest={{ item.dest }} force={{ item.force| default("yes")}} owner=jenkins group=jenkins
+  with_items:
+    - "{{ jenkins_resources }}"
+  notify: restart jenkins
 
 - name: start jenkins
   service: name=jenkins state=started enabled=yes

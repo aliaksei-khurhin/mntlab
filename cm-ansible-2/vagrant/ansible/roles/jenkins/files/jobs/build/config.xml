@@ -12,12 +12,16 @@
         <artifactNumToKeep>3</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.6.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/MNTLab/cm-ansible-1</url>
+        <url>https://github.com/MNTLab/cm-ansible-2</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -33,14 +37,12 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <authToken>azaza</authToken>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.example</groupId>
     <artifactId>mnt-lab</artifactId>
   </rootModule>
-  <rootPOM>pom.xml</rootPOM>
   <goals>clean package -DbuildNumber=${BUILD_ID}</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -60,8 +62,7 @@
   <reporters/>
   <publishers/>
   <buildWrappers/>
-  <prebuilders/>
-  <postbuilders>
+  <prebuilders>
     <hudson.tasks.Shell>
       <command>datetime=$(date)
 cat &lt;&lt; INFO &gt; src/main/resources/build-info.txt 
@@ -70,6 +71,8 @@ Latest commit: ${GIT_COMMIT}
 Name of branch: ${GIT_BRANCH}
 Building date time: $datetime INFO</command>
     </hudson.tasks.Shell>
+  </prebuilders>
+  <postbuilders>
     <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.32">
       <configs>
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>

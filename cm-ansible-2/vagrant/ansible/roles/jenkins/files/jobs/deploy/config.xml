@@ -28,8 +28,8 @@ Job name: ${JOB_NAME}
 Deployment job number: ${BUILD_NUMBER}
 Deployment timestamp: $datetime
 EOF
-cp /var/lib/jenkins/workspace/build/target/*.war /usr/share/tomcat/webapps/
-cp deploy-info.txt /usr/share/tomcat/webapps/</command>
+cp /var/lib/jenkins/workspace/build/target/*.war /var/lib/tomcat/webapps/
+cp deploy-info.txt /var/lib/tomcat/webapps/</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

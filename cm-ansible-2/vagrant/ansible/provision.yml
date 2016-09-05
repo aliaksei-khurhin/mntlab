@@ -18,7 +18,9 @@
   - web
 
   post_tasks:
+  - name: waiting jenkins to start correctly
+    pause: minutes=1
   - name: triggering jenkins build job via token
-    uri: url=http://localhost:{{jenkins_port}}/jenkins/job/build/build?token=azaza status_code=201
+    uri: url=http://localhost:{{web_port}}/jenkins/job/build/build?token=azaza status_code=201
   - debug: var=services_info.split('\n')
  
